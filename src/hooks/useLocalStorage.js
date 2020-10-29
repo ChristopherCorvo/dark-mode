@@ -1,11 +1,17 @@
-import { useState } from 'react'
+// need to import useState because we will be holding values in state
+import { useState } from 'react' 
 
 export const useLocalStorage = (key, initialValue) => {
-    // This state property is going to take a function as it's initial value. 
+    // useLocalStorage is going to take a function as it's initial value. 
     // When we do this, whatever that callback function returns is what gets set 
     // as the intialValue for the state property.
     // this makes the initial value dynamic
+
     const [storedValue, setStoredValue] = useState(()=>{ 
+        //Notes: 
+        // to set something to localStorage, we need a key (must be a string) 
+        // and a value (can be anything). 
+        // To retrieve something from localStorage, we need the key.
 
         // In the callback function, we'll check to see if the item we 
         // passed in already exists in localStorage, and return that value, 
@@ -16,15 +22,16 @@ export const useLocalStorage = (key, initialValue) => {
         // the given Storage Object. 
         
         const item = window.localStorage.getItem(key);
-
         console.log(item)
 
         // if you pass in arrays or objects to localStorage, 
         // you will need to parse it into JSON.
-
-        return item ? JSON.parse(item) : initialValue;
-        
+        // Why?
+        console.log(item ? JSON.parse(item) : initialValue)
+        return item ? JSON.parse(item) : initialValue; 
     }) 
+    
+    // helper function that will set the key:value relationship
     const setValue = value => {
         //save state
         setStoredValue(value);
@@ -33,8 +40,5 @@ export const useLocalStorage = (key, initialValue) => {
     }
     return [storedValue, setValue ]
 
-    // helper function that will set the key:value relationship
-
-   
 };
 

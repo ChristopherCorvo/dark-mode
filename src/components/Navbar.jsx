@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
 const Navbar = (props) => {
+  
   const toggleMode = e => {
     e.preventDefault();
-    props.setDarkMode(!props.darkMode);
+    console.log(props.darkMode)
+    props.setDarkMode(!props.darkMode); // set to the opposite of current darkmode value
   };
   return (
     <nav className="navbar">
@@ -11,7 +13,7 @@ const Navbar = (props) => {
       <div className="dark-mode__toggle">
         <div
           onClick={toggleMode}
-          className={props.darkMode ? 'toggle toggled' : 'toggle'}
+          className={props.darkMode ? 'toggle toggled' : 'toggle'} // if props.darkmode === true change className to 'toggle toggled' else 'toggle'
         />
       </div>
     </nav>
